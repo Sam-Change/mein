@@ -41,44 +41,33 @@
         object-position: center center; /* 對齊中心 */
         pointer-events: none; /* 圖片不可點 */
         user-select: none;
-        filter: brightness(0.9); /* 讓字比較清楚，可依需求調 */
       }
 
       /* 前景主容器，切上下比例 */
       .hero__content {
         position: relative;
         z-index: 1;
-        width: 100%;
-        height: 100%;
         display: flex;
         flex-direction: column;
-        max-width: 100vw;
+        height: 100%;
       }
 
       /* 上方標題區: 1/3 高度 */
       .header-section {
-        flex: 1; /* 占 1 份 */
+        flex: 1;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        background: rgba(0, 0, 0, 0.2); /* 半透明，無模糊 */
         padding: 16px;
-        text-align: center;
-
-        /* 半透明底，還看得到背景圖 */
-        background: rgba(0, 0, 0, 0.25);
-        backdrop-filter: blur(2px);
-
-        /* 分隔陰影 (往下投影) */
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8);
       }
 
       .title {
         font-size: clamp(24px, 2.5vw + 16px, 40px);
         font-weight: 600;
-        /*color: #fff;*/
-        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-        margin-bottom: 24px;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+        margin-bottom: 16px;
       }
 
       .enter-btn {
@@ -89,37 +78,29 @@
         font-size: 16px;
         font-weight: 600;
         padding: 12px 24px;
-        min-width: 120px;
         cursor: pointer;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
         transition: all 0.15s ease;
       }
 
       .enter-btn:hover {
         background-color: #fff;
-        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.8);
-        transform: translateY(-1px) scale(1.02);
+        transform: translateY(-1px);
       }
 
       /* 下方內容區：2/3 高度 */
       .body-section {
-        flex: 2; /* 占 2 份 */
+        flex: 2;
+        background: rgba(0, 0, 0, 0.15);
+        padding: 16px;
         display: flex;
         flex-direction: column;
-        padding: 16px;
-        background: rgba(0, 0, 0, 0.15); /* 半透明 */
-        backdrop-filter: blur(1px);
-        color: #fff;
       }
 
       .body-inner {
         flex: 1;
         overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-        padding-bottom: 16px;
         font-size: 16px;
         line-height: 1.4;
-        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
       }
 
       /* 底部水平選單列 */
@@ -130,11 +111,8 @@
         gap: 12px;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
-        scrollbar-width: none; /* Firefox 隱藏捲軸 */
-        padding: 8px 4px 4px 4px;
-        border-radius: 12px;
-        background: rgba(0, 0, 0, 0.3);
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8) inset;
+        scrollbar-width: none;
+        padding: 8px 4px;
       }
 
       .menu-scroll-wrapper::-webkit-scrollbar {
@@ -148,29 +126,16 @@
         padding: 10px 20px;
         font-size: 15px;
         font-weight: 600;
-        line-height: 1.2;
         background: rgba(255, 255, 255, 0.9);
         color: #000;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
         cursor: pointer;
         white-space: nowrap;
-        min-width: 100px;
         transition: all 0.15s ease;
       }
 
-      .menu-btn:active,
       .menu-btn:hover {
         background: #fff;
-        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.9);
-        transform: translateY(-1px) scale(1.03);
-      }
-
-      /* 讓按鈕的點擊範圍在行動裝置比較舒服 */
-      @media (pointer: coarse) {
-        .menu-btn {
-          padding: 14px 24px;
-          font-size: 16px;
-        }
+        transform: translateY(-1px);
       }
     </style>
   </head>
@@ -183,26 +148,28 @@
         alt="background"
       />
 
-      <!-- 前景內容：上下分區 -->
       <div class="hero__content">
-        <!-- 上方 1/3：標題 + 主按鈕 -->
+        <!-- 上方 -->
         <header class="header-section">
           <h1 class="title">test123</h1>
+          <button
+            class="enter-btn"
+            onclick="window.open('https://www.yahoo.co.jp/', '_blank', 'noopener,noreferrer')"
+          >
+            進入
+          </button>
         </header>
 
-        <!-- 下方 2/3：內容 + 橫向可滑選單 -->
+        <!-- 下方 -->
         <main class="body-section">
           <div class="body-inner">
             <p>
-              這裡是內容區塊，可以放描述、公告、說明文字、或是之後的元件。
-              <br /><br />
-              底下的水平選單可以左右滑動，按鈕可以決定「外開新分頁」或「本頁跳轉」。
+              這裡是內容區塊，可放文字或其他元件。<br />
+              底部有可滑動的選單按鈕。
             </p>
           </div>
 
-          <!-- 可左右滑動的選單 -->
           <nav class="menu-scroll-wrapper">
-            <!-- 按鈕1：外開新分頁 -->
             <button
               class="menu-btn"
               onclick="window.open('https://www.yahoo.co.jp/', '_blank', 'noopener,noreferrer')"
@@ -210,18 +177,16 @@
               外開 Yahoo
             </button>
 
-            <!-- 按鈕2：站內跳轉（同視窗換頁）-->
             <button
               class="menu-btn"
-              onclick="window.location.href='index.html';"
+              onclick="window.location.href='JS_Dev/jsDev20250225.html';"
             >
               前往 Page2
             </button>
 
-            <!-- 按鈕3：外開 Google -->
             <button
               class="menu-btn"
-              onclick="window.open('https://sam-change.github.io/mein/index', '_blank', 'noopener,noreferrer')"
+              onclick="window.open('https://sam-change.github.io/JS_Dev/jsDev20250225.html', '_blank', 'noopener,noreferrer')"
             >
               外開 Google
             </button>
