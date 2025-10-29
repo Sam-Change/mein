@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>測試頁面</title>
+    <style>
+      /* 頁面歸零，避免橫向卷軸 */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        overflow-x: hidden; /* 保證不會有左右scroll */
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        background-color: #000; /* 背景黑，避免還沒載到圖時閃白 */
+        color: #fff;
+      }
+
+      /* 整個滿版區塊 */
+      .hero {
+        position: relative;
+        width: 100%;
+        height: 100vh; /* 佔滿一個視窗高度 */
+        max-width: 100vw; /* 不能比螢幕寬 */
+        overflow: hidden; /* 超出裁掉，避免出現橫向卷軸 */
+      }
+
+      /* 背景圖本體 */
+      .hero__bg {
+        position: absolute;
+        inset: 0; /* top/right/bottom/left:0 */
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* 等比例放大填滿，可能會稍微裁切 */
+        object-position: center center; /* 對齊中心 */
+        pointer-events: none; /* 圖片不可點 */
+        user-select: none;
+      }
+
+      /* 疊在背景上的文字+按鈕容器 */
+      .hero__content {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 24px;
+        z-index: 1;
+      }
+
+      .title {
+        font-size: clamp(24px, 2.5vw + 16px, 40px);
+        font-weight: 600;
+        color: #fff;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+        margin-bottom: 24px;
+      }
+
+      .enter-btn {
+        appearance: none;
+        border: none;
+        border-radius: 8px;
+        background-color: rgba(255, 255, 255, 0.9);
+        color: #000;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 1.2;
+        padding: 12px 24px;
+        min-width: 120px;
+        cursor: pointer;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+        transition: all 0.15s ease;
+      }
+
+      .enter-btn:active,
+      .enter-btn:hover {
+        background-color: #fff;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.8);
+        transform: translateY(-1px) scale(1.02);
+      }
+    </style>
+  </head>
+  <body>
+    <section class="hero">
+      <!-- 👇 這裡放「滿版的背景圖」：把 src 換成你的圖片 URL -->
+      <img
+        class="hero__bg"
+        src="https://raw.githubusercontent.com/Sam-Change/JS_Dev/5e1161f9161c1896cfca1c67119710f1ad2b0eaf/imgTest04.png"
+        alt="background"
+      />
+
+      <!-- 前景內容（標題 + 按鈕） -->
+      <div class="hero__content">
+        <h1 class="title">test123</h1>
+        <button class="enter-btn">進入</button>
+      </div>
+    </section>
+  </body>
+</html>
